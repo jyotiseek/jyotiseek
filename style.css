@@ -1,0 +1,240 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* --- Reset & Base --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    background-color: black;
+    /* Using standard sizing instead of 62.5% to work better with Tailwind */
+    font-family: 'Poppins', sans-serif;
+    overflow-x: hidden;
+}
+
+section {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    /* Use the variable if present, otherwise default to black */
+    background-color: var(--bg, #000);
+    overflow: hidden;
+}
+
+/* --- SECTION 1: LOOP CAROUSEL --- */
+.loop-images {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.carousel-track {
+    /* Adjusted rem sizes to standard */
+    --left: -3000px; /* Approximate width of all items */
+    min-width: calc(300px * var(--total));
+    height: 300px;
+    position: relative;
+    display: flex;
+}
+
+.carousel-track .carousel-item {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    left: 100%;
+    display: flex;
+    justify-content: center;
+    perspective: 1000px;
+    transform-style: preserve-3d;
+    animation: scroll-left var(--time) linear infinite;
+    animation-delay: calc(var(--time) / var(--total) * (var(--i) - 1) - var(--time));
+    will-change: left;
+    transition: 0.5s ease-in-out;
+    cursor: pointer;
+}
+
+.carousel-track .carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background-color: white;
+    transform: rotateY(-45deg);
+    transition: 0.5s ease-in-out;
+    mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+}
+
+.carousel-track .carousel-item:hover img {
+    transform: rotateY(0deg) translateY(-10px);
+    z-index: 10;
+}
+
+@keyframes scroll-left {
+    to { left: var(--left); }
+}
+
+.scroll-down {
+    position: absolute;
+    bottom: 50px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+    40% {transform: translateY(-10px);}
+    60% {transform: translateY(-5px);}
+}
+
+/* --- SECTION 2: MOTION IMAGE --- */
+.section2 {
+    height: 100vh;
+    perspective: 1500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-motion {
+    width: 80%;
+    height: 80%;
+    object-position: center;
+    transform-origin: 50% 0;
+    will-change: transform;
+}
+
+.image-motion picture {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.image-motion picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background-color: white;
+    border-radius: 20px;
+}
+
+/* --- SECTION 3: FEATURES --- */
+.section3 {
+    --text-primary: #ccc;
+    --text-secondary: #aaa;
+    --text-white: #ffffff;
+    --accent-primary: #ff6b6b;
+    --accent-secondary: #ff8a80;
+    --accent-tertiary: #ffab40;
+    --accent-quaternary: #ff7043;
+    --accent-quinary: #ff5722;
+    --border-radius: 25px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-white);
+    padding: 60px 20px;
+    min-height: 100vh;
+}
+
+.section3 .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    text-align: center;
+}
+
+.section3 .title {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 25px;
+    background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 25%, var(--accent-tertiary) 50%, var(--accent-quaternary) 75%, var(--accent-quinary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: inline-block;
+}
+
+.section3 .subtitle {
+    position: relative;
+    width: fit-content;
+    margin-inline: auto;
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: var(--text-primary);
+    margin-bottom: 20px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.section3 .text {
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--text-primary);
+    line-height: 1.8;
+    margin-bottom: 25px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.section3 .features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-top: 50px;
+}
+
+.section3 .feature {
+    background: linear-gradient(145deg, rgba(255, 107, 107, 0.1) 0%, rgba(255, 138, 128, 0.05) 100%);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 107, 107, 0.3);
+    border-radius: var(--border-radius);
+    padding: 35px 25px;
+    text-align: center;
+    transition: all 0.4s ease;
+    cursor: pointer;
+}
+
+.section3 .feature:hover {
+    transform: translateY(-15px) scale(1.02);
+    border-color: rgba(255, 107, 107, 0.6);
+}
+
+.section3 .feature-icon {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.section3 .feature h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-white);
+    margin-bottom: 15px;
+}
+
+.section3 .feature p {
+    font-size: 1rem;
+    color: var(--text-secondary);
+}
+/* Custom Date/Time Input Styling for Dark Mode */
+.custom-date-icon::-webkit-calendar-picker-indicator {
+    filter: invert(1); /* Turns the icon white */
+    cursor: pointer;
+    opacity: 0.6;
+}
+.custom-date-icon::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+}
