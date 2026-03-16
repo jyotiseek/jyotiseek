@@ -1,536 +1,587 @@
 <!doctype html>
 <html class="dark" lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Jyotisha</title>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jyotisha — Vedic Astrology</title>
+  <meta name="description" content="Jyotisha — Ancient Vedic astrology for modern seekers. Birth chart readings, timing cycles, and cosmic guidance." />
 
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com" rel="preconnect" />
-    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700&family=Manrope:wght@200;300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-      rel="stylesheet"
-    />
+  <!-- Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-    <!-- External Animation Libraries -->
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <!-- Fonts async (non-blocking) — Cinzel · Playfair Display · Poppins -->
+  <link rel="stylesheet" media="print" onload="this.media='all'"
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;500;600&display=swap" />
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;500;600&display=swap" />
+  </noscript>
+  <!-- Material Icons async -->
+  <link rel="stylesheet" media="print" onload="this.media='all'"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@400,0&display=swap" />
 
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <script>
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              primary: "#e77e23",
-              "background-light": "#f8f7f6",
-              "background-dark": "#050505",
-              "surface-dark": "#0a0a0a",
-              "text-dim": "#888888",
-            },
-            fontFamily: {
-              display: ["Cinzel", "serif"],
-              body: ["Manrope", "sans-serif"],
-              modern: ["Poppins", "sans-serif"],
-            },
-            spacing: { 128: "32rem" },
+  <!-- Tailwind — sync (must parse classes before first paint) -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#F1592A',
+            bg:      '#0e1a1c',
+            bg2:     '#172A2C',
+            surface: '#1c3133',
+          },
+          fontFamily: {
+            display: ['Cinzel',           'serif'],
+            heading: ['Playfair Display', 'serif'],
+            body:    ['Poppins',          'sans-serif'],
           },
         },
-      };
-    </script>
+      },
+    };
+  </script>
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css" />
-  </head>
+  <!-- EmailJS: MUST be sync (no defer) so init() fires before any form submit -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    (function () {
+      // Get your Public Key from: emailjs.com → Account → API Keys → Public Key
+      emailjs.init({ publicKey: "kJ3uh0WqyOOr37ivA" });
+    })();
+  </script>
 
-  <body
-    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-gray-200 font-body antialiased overflow-x-hidden transition-colors duration-500"
-  >
-    <!-- Header / Navigation -->
-    <nav
-      class="fixed top-0 w-full z-50 mix-blend-difference px-6 py-8 md:px-12 flex justify-between items-center pointer-events-none"
-    >
-      <div class="pointer-events-auto">
-        <a
-          href="index.html"
-          class="font-display font-medium text-lg tracking-[0.2em] text-white uppercase opacity-80 hover:opacity-100 transition-opacity"
-        >
-          Jyotisha
-        </a>
-      </div>
-      <div class="hidden md:flex items-center gap-12 pointer-events-auto">
-        <a
-          href="index.html"
-          class="text-xs font-bold tracking-[0.15em] text-stone-400 uppercase hover:text-primary transition-colors"
-          >Home</a
-        >
-        <a
-          href="about.html"
-          class="text-xs font-bold tracking-[0.15em] text-stone-400 uppercase hover:text-primary transition-colors"
-          >About</a
-        >
-        <a
-          href="journal.html"
-          class="text-xs font-bold tracking-[0.15em] text-stone-400 uppercase hover:text-primary transition-colors"
-          >Journal</a
-        >
-        <a
-          href="services.html"
-          class="text-xs font-bold tracking-[0.15em] text-stone-400 uppercase hover:text-primary transition-colors"
-          >Offerings</a
-        >
-        <a
-          href="contact.html"
-          class="text-xs font-bold tracking-[0.15em] text-stone-400 uppercase hover:text-primary transition-colors"
-          >Contact</a
-        >
-      </div>
+  <!-- GSAP deferred — scroll animations only, non-blocking -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
 
-      <div class="md:hidden pointer-events-auto">
-        <button
-          id="mobile-menu-btn"
-          class="group flex items-center gap-2 text-xs font-bold tracking-[0.1em] text-white uppercase hover:text-primary transition-colors"
-        >
-          <span class="material-symbols-outlined text-lg">menu</span>
-        </button>
-      </div>
-    </nav>
+  <link rel="icon" type="image/svg+xml" href="logo.svg" />
+  <link rel="stylesheet" href="style.css" />
+</head>
 
-    <!-- Mobile Menu Overlay -->
-    <div
-      id="mobile-menu"
-      class="fixed inset-0 z-40 bg-[#050505] flex flex-col items-center justify-center opacity-0 pointer-events-none transition-opacity duration-500"
-    >
-      <button
-        id="close-menu-btn"
-        class="absolute top-8 right-6 text-stone-500 hover:text-white transition-colors"
-      >
-        <span class="material-symbols-outlined text-2xl">close</span>
+<body class="bg-bg text-[#d8e8e9] font-body antialiased overflow-x-hidden">
+
+  <!-- ── LOADER ─────────────────────────────────────────────────────────── -->
+  <div id="page-loader">
+    <span style="font-family:'Cinzel',serif;color:rgba(255,255,255,0.5);font-size:.85rem;letter-spacing:.4em;text-transform:uppercase;">Jyotisha</span>
+    <div class="loader-bar"></div>
+    <span style="font-size:.6rem;color:rgba(255,255,255,.18);letter-spacing:.3em;text-transform:uppercase;">Reading the stars</span>
+  </div>
+
+  <!-- ── CURSOR ─────────────────────────────────────────────────────────── -->
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"></div>
+
+  <!-- ── NAV ────────────────────────────────────────────────────────────── -->
+  <nav class="fixed top-0 w-full z-50 mix-blend-difference px-6 py-7 md:px-12 flex justify-between items-center pointer-events-none">
+    <div class="pointer-events-auto">
+      <a href="index.html" class="font-display text-base tracking-[0.25em] text-white uppercase opacity-80 hover:opacity-100 transition-opacity">
+        Jyotisha
+      </a>
+    </div>
+    <div class="hidden md:flex items-center gap-10 pointer-events-auto">
+      <a href="index.html"   class="text-xs font-medium tracking-[0.15em] text-[#7a9496] uppercase hover:text-primary transition-colors underline-hover">Home</a>
+      <a href="about.html"   class="text-xs font-medium tracking-[0.15em] text-[#7a9496] uppercase hover:text-primary transition-colors underline-hover">About</a>
+      <a href="contact.html" class="text-xs font-medium tracking-[0.15em] text-[#7a9496] uppercase hover:text-primary transition-colors underline-hover">Contact</a>
+      <a href="contact.html?subject=reading"
+        class="pointer-events-auto px-5 py-2.5 border border-primary/50 hover:bg-primary text-primary hover:text-white text-xs font-semibold tracking-[0.15em] uppercase transition-all duration-300 rounded-full">
+        Book Reading
+      </a>
+    </div>
+    <div class="md:hidden pointer-events-auto">
+      <button id="mobile-menu-btn" class="text-white">
+        <span class="material-symbols-outlined text-xl">menu</span>
       </button>
-      <div class="flex flex-col gap-8 text-center">
-        <a
-          href="index.html"
-          class="mobile-link font-display text-3xl text-stone-400 hover:text-primary transition-colors"
-          >Home</a
-        >
-        <a
-          href="about.html"
-          class="mobile-link font-display text-3xl text-stone-400 hover:text-primary transition-colors"
-          >About</a
-        >
-        <a
-          href="journal.html"
-          class="mobile-link font-display text-3xl text-stone-400 hover:text-primary transition-colors"
-          >Journal</a
-        >
-        <a
-          href="services.html"
-          class="mobile-link font-display text-3xl text-stone-400 hover:text-primary transition-colors"
-          >Offerings</a
-        >
-        <a
-          href="contact.html"
-          class="mobile-link font-display text-3xl text-stone-400 hover:text-primary transition-colors"
-          >Contact</a
-        >
+    </div>
+  </nav>
+
+  <!-- ── MOBILE MENU ─────────────────────────────────────────────────────── -->
+  <div id="mobile-menu" class="fixed inset-0 z-[60] bg-bg flex flex-col items-center justify-center opacity-0 pointer-events-none transition-opacity duration-500">
+    <button id="close-menu-btn" class="text-[#7a9496] hover:text-white transition-colors">
+      <span class="material-symbols-outlined text-2xl">close</span>
+    </button>
+    <div class="flex flex-col gap-8 text-center mt-6">
+      <a href="index.html"                   class="mobile-link font-display text-3xl text-[#7a9496] hover:text-primary transition-colors">Home</a>
+      <a href="about.html"                   class="mobile-link font-display text-3xl text-[#7a9496] hover:text-primary transition-colors">About</a>
+      <a href="contact.html"                 class="mobile-link font-display text-3xl text-[#7a9496] hover:text-primary transition-colors">Contact</a>
+      <a href="contact.html?subject=reading" class="mobile-link font-display text-3xl text-primary">Book Reading</a>
+    </div>
+    <div class="absolute bottom-10 text-[10px] text-[#3e5658] tracking-widest uppercase">© 2026 Jyotisha</div>
+  </div>
+
+  <!-- ── HERO ───────────────────────────────────────────────────────────── -->
+  <section class="relative h-screen min-h-[700px] flex flex-col items-center justify-center text-center px-6 overflow-hidden hero-gradient">
+    <canvas id="star-canvas" aria-hidden="true"></canvas>
+
+    <div class="absolute inset-0 flex items-center justify-center pointer-events-none" aria-hidden="true">
+      <div class="orbit-ring"></div>
+      <div class="orbit-ring"></div>
+      <div class="orbit-ring"></div>
+    </div>
+
+    <img src="sun.png" alt="" aria-hidden="true" loading="lazy" decoding="async"
+      class="hero-planet parallax-planet absolute right-[8%] top-[18%] w-20 md:w-32 opacity-65 select-none"
+      data-parallax-speed="0.03" />
+    <img src="saturn.png" alt="" aria-hidden="true" loading="lazy" decoding="async"
+      class="parallax-planet absolute left-[6%] bottom-[22%] w-16 md:w-28 opacity-45 select-none"
+      style="animation:floatPlanet 12s ease-in-out 2s infinite;filter:drop-shadow(0 0 24px rgba(100,160,255,0.18));"
+      data-parallax-speed="-0.02" />
+
+    <div class="relative z-10 flex flex-col items-center max-w-4xl mx-auto">
+      <div class="fade-in-up mb-6 flex items-center gap-3">
+        <div class="w-7 h-px bg-primary/60"></div>
+        <p class="font-body text-primary text-[0.65rem] tracking-[0.35em] uppercase opacity-80">Jyotishya · Vedic Astrology</p>
+        <div class="w-7 h-px bg-primary/60"></div>
+      </div>
+
+      <h1 class="fade-in-up delay-200 font-display text-5xl md:text-7xl lg:text-8xl text-white leading-[1.08] tracking-tight mb-5">
+        Time reveals<br />
+        <em class="text-white/20" style="font-style:italic;">itself.</em>
+      </h1>
+
+      <p class="fade-in-up delay-300 font-heading italic text-base md:text-lg text-[#7a9496] max-w-md leading-relaxed mb-10">
+        The cosmos does not speak loudly. It whispers in the architecture of light, and we translate.
+      </p>
+
+      <div class="fade-in-up delay-500 flex flex-wrap items-center justify-center gap-4">
+        <a href="#meaning"
+          class="group relative inline-flex items-center justify-center px-8 py-3.5 overflow-hidden border border-white/10 rounded-full hover:border-primary/50 transition-all duration-500 glow-hover">
+          <span class="absolute w-0 h-0 transition-all duration-500 ease-out bg-primary rounded-full group-hover:w-56 group-hover:h-56 opacity-10"></span>
+          <span class="relative text-xs font-semibold uppercase tracking-[0.2em] text-white group-hover:text-primary transition-colors">Enter the Archive</span>
+        </a>
+        <a href="contact.html?subject=reading"
+          class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#4a6062] hover:text-primary transition-colors px-4 py-3">
+          Book a Reading
+          <span class="material-symbols-outlined text-sm">arrow_forward</span>
+        </a>
       </div>
     </div>
 
-    <!-- Hero Section -->
-    <section
-      class="relative h-screen min-h-[800px] flex flex-col items-center justify-center text-center px-6 overflow-hidden"
-    >
-      <div
-        class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(231,126,35,0.08)_0%,rgba(5,5,5,0)_60%)] pointer-events-none"
-      ></div>
-      <div class="z-10 flex flex-col items-center max-w-5xl mx-auto">
-        <p
-          class="fade-in-up font-body text-primary text-xs tracking-[0.3em] mb-8 uppercase opacity-80"
-        >
-          Jyotishya • Vedic Astrology
+    <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40">
+      <span class="text-[9px] uppercase tracking-[0.3em] text-white/40">Scroll</span>
+      <div class="w-px h-10 bg-gradient-to-b from-primary to-transparent"></div>
+    </div>
+  </section>
+
+  <!-- ── MARQUEE ─────────────────────────────────────────────────────────── -->
+  <div class="overflow-hidden py-4 border-y border-white/5 bg-bg2" aria-hidden="true">
+    <div class="marquee-track text-[10px] font-body uppercase tracking-[0.35em] text-[#3e5658]">
+      <span>Birth Chart</span><span class="text-primary mx-2">✦</span>
+      <span>Vedic Astrology</span><span class="text-primary mx-2">✦</span>
+      <span>Saturn Return</span><span class="text-primary mx-2">✦</span>
+      <span>Dashas &amp; Cycles</span><span class="text-primary mx-2">✦</span>
+      <span>Planetary Transits</span><span class="text-primary mx-2">✦</span>
+      <span>Karma &amp; Dharma</span><span class="text-primary mx-2">✦</span>
+      <span>Synastry</span><span class="text-primary mx-2">✦</span>
+      <span>Jyotishya</span><span class="text-primary mx-2">✦</span>
+      <span>Birth Chart</span><span class="text-primary mx-2">✦</span>
+      <span>Vedic Astrology</span><span class="text-primary mx-2">✦</span>
+      <span>Saturn Return</span><span class="text-primary mx-2">✦</span>
+      <span>Dashas &amp; Cycles</span><span class="text-primary mx-2">✦</span>
+      <span>Planetary Transits</span><span class="text-primary mx-2">✦</span>
+      <span>Karma &amp; Dharma</span><span class="text-primary mx-2">✦</span>
+      <span>Synastry</span><span class="text-primary mx-2">✦</span>
+      <span>Jyotishya</span><span class="text-primary mx-2">✦</span>
+    </div>
+  </div>
+
+  <!-- ── MEANING ─────────────────────────────────────────────────────────── -->
+  <section class="relative py-28 md:py-44 px-6 md:px-24 max-w-7xl mx-auto" id="meaning">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+      <div class="lg:col-span-5">
+        <div class="section-divider reveal"></div>
+        <p class="reveal font-body text-xs text-[#3e5658] uppercase tracking-[0.3em] mb-5">The Foundation</p>
+        <h2 class="reveal font-heading text-4xl md:text-5xl text-white leading-tight font-normal">
+          Astrology is not belief. It is the
+          <em class="text-white/35">mathematics</em> of light.
+        </h2>
+      </div>
+      <div class="lg:col-span-6 lg:col-start-7 pt-4 lg:pt-14">
+        <p class="reveal font-body text-base md:text-lg text-[#7a9496] leading-relaxed mb-6 font-light">
+          We map the architecture of time itself. Patterns emerge from the chaos, guiding the observant eye toward inevitable conclusions. In the silence between moments, destiny speaks its clearest language.
         </p>
-        <h1
-          class="fade-in-up delay-300 font-display text-5xl md:text-8xl lg:text-9xl font-normal text-white leading-[1.1] tracking-tight"
-        >
-          Time reveals<br /><span class="text-white/30 italic font-light"
-            >itself.</span
-          >
-        </h1>
-        <div class="fade-in-up delay-700 mt-16 md:mt-24">
-          <a
-            class="group relative inline-flex items-center justify-center px-10 py-4 overflow-hidden border border-white/10 rounded-full hover:border-primary/50 transition-all duration-500 glow-hover"
-            href="#meaning"
-          >
-            <span
-              class="absolute w-0 h-0 transition-all duration-500 ease-out bg-primary rounded-full group-hover:w-56 group-hover:h-56 opacity-10"
-            ></span>
-            <span
-              class="relative text-sm font-bold uppercase tracking-[0.15em] text-white group-hover:text-primary transition-colors"
-              >Enter the Archive</span
-            >
+        <p class="reveal font-body text-[#4a6062] leading-relaxed text-sm">
+          Jyotishya — the eye of the Veda — is not fortune-telling. It is a precise diagnostic tool that examines the soul's blueprint at the moment of first breath, cross-referenced against the eternal clockwork of the planets.
+        </p>
+        <div class="reveal mt-8">
+          <a href="about.html" class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#4a6062] hover:text-primary transition-colors group">
+            Learn more
+            <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
           </a>
         </div>
       </div>
-      <div
-        class="absolute bottom-12 left-1/2 -translate-x-1/2 fade-in-up delay-700 opacity-50 flex flex-col items-center gap-2"
-      >
-        <span class="text-[10px] uppercase tracking-[0.2em] text-white/40"
-          >Begin</span
-        >
-        <div
-          class="w-[1px] h-12 bg-gradient-to-b from-primary to-transparent"
-        ></div>
-      </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Meaning Section -->
-    <section
-      class="relative py-32 md:py-48 px-6 md:px-24 max-w-7xl mx-auto"
-      id="meaning"
-    >
-      <div
-        class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-start"
-      >
-        <div class="lg:col-span-4 lg:col-start-2 flex flex-col gap-6">
-          <span
-            class="text-primary text-xs font-bold tracking-[0.2em] uppercase flex items-center gap-3"
-          >
-            <span class="material-symbols-outlined text-sm">auto_awesome</span>
-            The Philosophy
-          </span>
-          <h2
-            class="font-display text-4xl md:text-5xl text-white leading-tight"
-          >
-            Astrology is not belief. It is the
-            <span class="italic text-white/50">mathematics</span> of light.
-          </h2>
-        </div>
-        <div class="lg:col-span-5 lg:col-start-7 pt-4 lg:pt-20">
-          <p
-            class="font-body text-lg md:text-xl text-stone-400 leading-relaxed mb-8"
-          >
-            We map the architecture of time itself. Patterns emerge from the
-            chaos, guiding the observant eye toward inevitable conclusions. In
-            the silence between moments, destiny speaks its clearest language.
-          </p>
+  <!-- ── 3D IMAGE SECTION ────────────────────────────────────────────────── -->
+  <section class="section2 relative flex items-center justify-center overflow-hidden py-12 min-h-[45vw] max-h-[680px] bg-mesh">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(30,50,52,0.3)_0%,rgba(14,26,28,1)_75%)] pointer-events-none"></div>
+    <div class="relative w-full max-w-4xl aspect-video px-6">
+      <div class="image-motion w-full h-full relative group">
+        <div class="absolute inset-0 bg-primary/15 blur-[90px] rounded-full scale-70 group-hover:scale-85 transition-transform duration-700"></div>
+        <picture class="relative block w-full h-full rounded-2xl overflow-hidden border border-white/8 shadow-2xl">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/9/9c/Black_hole_representation.gif?20230212075329"
+            alt="Cosmic Eternity" loading="lazy" decoding="async"
+            class="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-700 ease-out"
+          />
+        </picture>
+        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-black/30 backdrop-blur-sm rounded-2xl">
+          <span class="font-display text-2xl md:text-4xl text-white tracking-[0.6em] uppercase">Jyotisha</span>
         </div>
       </div>
-    </section>
-
-    <!-- INFINITE CAROUSEL SECTION (Updated with Planets) -->
-<section class="loop-images relative" id="gallery" style="--bg: #050505">
-
-  <div class="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#050505] to-transparent z-10 pointer-events-none"></div>
-
-  <div class="carousel-track" style="--time: 60s; --total: 12">
-
-    <!-- 1. [...](asc_slot://start-slot-1)The Sun -->
-    <div class="carousel-item" style="--i: 1">
-      <img 
-        src="https://raw.githubusercontent.com/Mayank-Garg7/SolarSystem/master/images/sun.png" 
-        onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/The_Sun_by_the_Atmospheric_Imaging_Assembly_of_NASA%27s_Solar_Dynamics_Observatory_-_20100819.jpg/600px-The_Sun_by_the_Atmospheric_Imaging_Assembly_of_NASA%27s_Solar_Dynamics_Observatory_-_20100819.jpg'"
-        alt="The Sun" 
-      />
     </div>
+  </section>
 
-    <!-- 2. [...](asc_slot://start-slot-3)The Moon -->
-    <div class="carousel-item" style="--i: 2">
-      <img 
-        src="https://raw.githubusercontent.com/Mayank-Garg7/SolarSystem/master/images/moon.png" 
-        onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/FullMoon2010.jpg/600px-FullMoon2010.jpg'"
-        alt="The Moon" 
-      />
+  <!-- ── STATS ────────────────────────────────────────────────────────────── -->
+  <section class="py-20 px-6 md:px-24 border-y border-white/5 bg-bg2">
+    <div class="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-5">
+      <div class="stat-card reveal text-center">
+        <div class="font-display text-4xl md:text-5xl text-primary mb-2 counter-num" data-target="10">0</div>
+        <div class="font-body text-xs uppercase tracking-widest text-[#3e5658]">Years of Study</div>
+      </div>
+      <div class="stat-card reveal text-center" style="transition-delay:.1s">
+        <div class="font-display text-4xl md:text-5xl text-primary mb-2 counter-num" data-target="500">0</div>
+        <div class="font-body text-xs uppercase tracking-widest text-[#3e5658]">Charts Read</div>
+      </div>
+      <div class="stat-card reveal text-center" style="transition-delay:.2s">
+        <div class="font-display text-4xl md:text-5xl text-primary mb-2 counter-num" data-target="12">0</div>
+        <div class="font-body text-xs uppercase tracking-widest text-[#3e5658]">Vedic Systems</div>
+      </div>
+      <div class="stat-card reveal text-center" style="transition-delay:.3s">
+        <div class="font-display text-4xl md:text-5xl text-primary mb-2">∞</div>
+        <div class="font-body text-xs uppercase tracking-widest text-[#3e5658]">Cosmic Cycles</div>
+      </div>
     </div>
+  </section>
 
-    <!-- 3. [...](asc_slot://start-slot-5)Mercury -->
-    <div class="carousel-item" style="--i: 3">
-      <img 
-        src="https://raw.githubusercontent.com/Mayank-Garg7/SolarSystem/master/images/mercury.png" 
-        onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Mercury_in_color_-_Prockter07-edit1.jpg/600px-Mercury_in_color_-_Prockter07-edit1.jpg'"
-        alt="Mercury" 
-      />
+  <!-- ── OFFERINGS ─────────────────────────────────────────────────────────── -->
+  <section class="py-28 md:py-44 px-6 md:px-24 max-w-7xl mx-auto" id="offerings">
+    <div class="mb-16">
+      <div class="section-divider reveal"></div>
+      <p class="reveal font-body text-xs text-[#3e5658] uppercase tracking-[0.3em] mb-4">What We Offer</p>
+      <h2 class="reveal font-heading text-4xl md:text-5xl text-white font-normal">The Readings</h2>
     </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
 
-    <!-- 4. Venus -->
-    <div class="carousel-item" style="--i: 4">
-      <img 
-        src="https://raw.githubusercontent.com/Mayank-Garg7/SolarSystem/master/images/venus.png" 
-        onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Venus-real_color.jpg/600px-Venus-real_color.jpg'"
-        alt="Venus" 
-      />
+      <div class="offering-card reveal group">
+        <div class="flex items-start justify-between mb-5">
+          <span class="font-body text-primary font-mono text-xs opacity-60">01 /</span>
+          <span class="material-symbols-outlined text-[#3e5658] group-hover:text-primary transition-colors">person_pin_circle</span>
+        </div>
+        <h3 class="font-heading text-2xl md:text-3xl text-white mb-3 font-normal group-hover:text-primary transition-colors">Birth Chart Interpretation</h3>
+        <p class="font-body text-[#4a6062] leading-relaxed mb-7 text-sm group-hover:text-[#7a9496] transition-colors">
+          The blueprint of the soul at the moment of first breath. We decode the planetary positions to reveal character, purpose, and inherent contradictions.
+        </p>
+        <a href="contact.html?subject=reading" class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-[#4a6062] hover:text-primary transition-all hover:gap-3">
+          Inquire <span class="material-symbols-outlined text-sm">arrow_forward</span>
+        </a>
+      </div>
+
+      <div class="offering-card reveal group" style="transition-delay:.1s">
+        <div class="flex items-start justify-between mb-5">
+          <span class="font-body text-primary font-mono text-xs opacity-60">02 /</span>
+          <span class="material-symbols-outlined text-[#3e5658] group-hover:text-primary transition-colors">schedule</span>
+        </div>
+        <h3 class="font-heading text-2xl md:text-3xl text-white mb-3 font-normal group-hover:text-primary transition-colors">Timing &amp; Cycles</h3>
+        <p class="font-body text-[#4a6062] leading-relaxed mb-7 text-sm group-hover:text-[#7a9496] transition-colors">
+          Understanding the "when." We analyze Dashas and transits to identify periods of friction, flow, and transformation in your timeline.
+        </p>
+        <a href="contact.html?subject=inquiry" class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-[#4a6062] hover:text-primary transition-all hover:gap-3">
+          Inquire <span class="material-symbols-outlined text-sm">arrow_forward</span>
+        </a>
+      </div>
+
+      <div class="offering-card reveal group" style="transition-delay:.15s">
+        <div class="flex items-start justify-between mb-5">
+          <span class="font-body text-primary font-mono text-xs opacity-60">03 /</span>
+          <span class="material-symbols-outlined text-[#3e5658] group-hover:text-primary transition-colors">favorite</span>
+        </div>
+        <h3 class="font-heading text-2xl md:text-3xl text-white mb-3 font-normal group-hover:text-primary transition-colors">Synastry &amp; Compatibility</h3>
+        <p class="font-body text-[#4a6062] leading-relaxed mb-7 text-sm group-hover:text-[#7a9496] transition-colors">
+          Two charts, one story. We examine the karmic resonance between souls — what binds, what challenges, and what is meant to be learned.
+        </p>
+        <a href="contact.html?subject=reading" class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-[#4a6062] hover:text-primary transition-all hover:gap-3">
+          Inquire <span class="material-symbols-outlined text-sm">arrow_forward</span>
+        </a>
+      </div>
+
+      <div class="offering-card reveal group" style="transition-delay:.2s">
+        <div class="flex items-start justify-between mb-5">
+          <span class="font-body text-primary font-mono text-xs opacity-60">04 /</span>
+          <span class="material-symbols-outlined text-[#3e5658] group-hover:text-primary transition-colors">psychology</span>
+        </div>
+        <h3 class="font-heading text-2xl md:text-3xl text-white mb-3 font-normal group-hover:text-primary transition-colors">Saturn Return Guidance</h3>
+        <p class="font-body text-[#4a6062] leading-relaxed mb-7 text-sm group-hover:text-[#7a9496] transition-colors">
+          The 29-year reckoning. Navigating this pivotal transit with clarity instead of chaos — understanding what must be built and what must be released.
+        </p>
+        <a href="contact.html?subject=inquiry" class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-[#4a6062] hover:text-primary transition-all hover:gap-3">
+          Inquire <span class="material-symbols-outlined text-sm">arrow_forward</span>
+        </a>
+      </div>
     </div>
+  </section>
 
-    <!-- 5. [...](asc_slot://start-slot-7)Earth -->
-    <div class="carousel-item" style="--i: 5">
-      <img 
-        src="https://raw.githubusercontent.com/Mayank-Garg7/SolarSystem/master/images/earth.png" 
-        onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/The_Earth_seen_from_Apollo_17.jpg/600px-The_Earth_seen_from_Apollo_17.jpg'"
-        alt="Earth" 
-      />
+  <!-- ── QUOTE ─────────────────────────────────────────────────────────────── -->
+  <section class="py-32 px-6 relative overflow-hidden bg-bg2 border-y border-white/5">
+    <div class="zodiac-wheel" aria-hidden="true"></div>
+    <div class="zodiac-wheel-reverse" aria-hidden="true"></div>
+    <div class="max-w-4xl mx-auto text-center relative z-10">
+      <span class="text-5xl text-primary/20 font-display block mb-4">"</span>
+      <blockquote class="font-heading text-2xl md:text-4xl text-white leading-relaxed italic font-normal">
+        Destiny is not a cage. It is a river. You cannot stop the water from flowing, but you can learn to swim with the current rather than drowning against it.
+      </blockquote>
+      <span class="text-5xl text-primary/20 font-display block mt-5">"</span>
+      <div class="mt-6 w-10 h-px bg-primary mx-auto"></div>
     </div>
+  </section>
 
-    <!-- 6. [...](asc_slot://start-slot-9)Mars -->
-    <div class="carousel-item" style="--i: 6">
-      <img 
-        src="https://raw.githubusercontent.com/Mayank-Garg7/SolarSystem/master/images/mars.png" 
-        onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/OSIRIS_Mars_true_color.jpg/600px-OSIRIS_Mars_true_color.jpg'"
-        alt="Mars" 
-      />
+  <!-- ── TESTIMONIALS ───────────────────────────────────────────────────────── -->
+  <section class="py-28 overflow-hidden">
+    <div class="px-6 md:px-24 max-w-7xl mx-auto mb-14">
+      <div class="section-divider reveal"></div>
+      <p class="reveal font-body text-xs text-[#3e5658] uppercase tracking-[0.3em] mb-4">Voices</p>
+      <h2 class="reveal font-heading text-4xl text-white font-normal">What Seekers Say</h2>
     </div>
-
-    <!-- 7. Jupiter -->
-    <div class="carousel-item" style="--i: 7">
-      <img 
-        src="https://raw.githubusercontent.com/Mayank-Garg7/SolarSystem/master/images/jupiter.png" 
-        onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Jupiter_by_Cassini-Huygens.jpg/600px-Jupiter_by_Cassini-Huygens.jpg'"
-        alt="Jupiter" 
-      />
-    </div>
-
-    <!-- 8. Saturn -->
-    <div class="carousel-item" style="--i: 8">
-      <img 
-        src="https://raw.githubusercontent.com/Mayank-Garg7/SolarSystem/master/images/saturn.png" 
-        onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Saturn_during_Equinox.jpg/640px-Saturn_during_Equinox.jpg'"
-        alt="Saturn" 
-      />
-    </div>
-
-    <!-- 9. [...](asc_slot://start-slot-11)Uranus -->
-    <div class="carousel-item" style="--i: 9">
-      <img 
-        src="https://raw.githubusercontent.com/Mayank-Garg7/SolarSystem/master/images/uranus.png" 
-        onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Uranus2.jpg/600px-Uranus2.jpg'"
-        alt="Uranus" 
-      />
-    </div>
-
-    <!-- 10. Neptune -->
-    <div class="carousel-item" style="--i: 10">
-      <img 
-        src="https://raw.githubusercontent.com/Mayank-Garg7/SolarSystem/master/images/neptune.png" 
-        onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Neptune_Full.jpg/600px-Neptune_Full.jpg'"
-        alt="Neptune" 
-      />
-    </div>
-
-    <!-- 11. [...](asc_slot://start-slot-13)Pluto -->
-    <div class="carousel-item" style="--i: 11">
-      <!-- Pluto might be missing from the repo, so we use a Wikimedia fallback just in case -->
-      <img 
-        src="https://raw.githubusercontent.com/Mayank-Garg7/SolarSystem/master/images/pluto.png" 
-        onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Pluto_in_True_Color_-_High_Res.jpg/600px-Pluto_in_True_Color_-_High_Res.jpg'"
-        alt="Pluto" 
-      />
-    </div>
-
-    <!-- 12. Galaxy/Cosmos -->
-    <div class="carousel-item" style="--i: 12">
-       <!-- Used a high-res deep field image as galaxies are not solid objects -->
-      <img 
-        src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Hubble_Ultra_Deep_Field_High_Rez_Edit1.jpg/640px-Hubble_Ultra_Deep_Field_High_Rez_Edit1.jpg" 
-        alt="Cosmos" 
-        style="border-radius: 50%; aspect-ratio: 1/1; object-fit: cover;"
-      />
-    </div>
-
-  </div>
-
-  <div class="absolute bottom-12 left-1/2 -translate-x-1/2 text-center pointer-events-none z-20">
-    <span class="text-[10px] uppercase tracking-[0.2em] text-white/40">The Celestial Bodies</span>
-  </div>
-
-</section>
-
-
-    <!-- 3D MOTION IMAGE SECTION -->
-    <section
-      class="section2 relative flex items-center justify-center overflow-hidden"
-      style="--bg: #050505"
-    >
-      <div
-        class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(50,50,50,0.2)_0%,rgba(5,5,5,1)_70%)] pointer-events-none"
-      ></div>
-      <div
-        class="image-motion-container relative w-full max-w-4xl aspect-video perspective-container"
-      >
-        <div
-          class="image-motion w-full h-full relative preserve-3d cursor-pointer group"
-        >
-          <!-- Glow Effect behind the image -->
-          <div
-            class="absolute inset-0 bg-primary/20 blur-[100px] rounded-full scale-75 group-hover:scale-90 transition-transform duration-700"
-          ></div>
-          <picture
-            class="relative block w-full h-full rounded-2xl overflow-hidden border border-white/10 shadow-2xl"
-          >
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/9/9c/Black_hole_representation.gif?20230212075329"
-              alt="Cosmic Eternity"
-              class="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-700 ease-out"
-            />
-          </picture>
-          <!-- Overlay Text -->
-          <div
-            class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-black/40 backdrop-blur-[2px]"
-          >
-            <span
-              class="font-display text-3xl text-white tracking-[0.5em] uppercase"
-              >Jyotisha</span
-            >
+    <div class="relative">
+      <div class="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-bg to-transparent z-10 pointer-events-none"></div>
+      <div class="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-bg to-transparent z-10 pointer-events-none"></div>
+      <div class="testimonial-track">
+        <div class="testimonial-card">
+          <div class="text-primary text-sm mb-3">★★★★★</div>
+          <p class="font-heading italic text-[#7a9496] font-normal leading-relaxed mb-5 text-sm">"The reading was unlike anything I had experienced. Not vague platitudes — specific, precise insights that reframed how I understood my own life."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-xs font-bold text-primary font-display">A</div>
+            <div><div class="font-body text-white text-sm font-medium">Aarav S.</div><div class="font-body text-[#3e5658] text-xs">Mumbai, India</div></div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="text-primary text-sm mb-3">★★★★★</div>
+          <p class="font-heading italic text-[#7a9496] font-normal leading-relaxed mb-5 text-sm">"I came in a skeptic. I left with a map. The timing analysis alone saved me from making a major career mistake."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-xs font-bold text-primary font-display">P</div>
+            <div><div class="font-body text-white text-sm font-medium">Priya M.</div><div class="font-body text-[#3e5658] text-xs">Kathmandu, Nepal</div></div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="text-primary text-sm mb-3">★★★★★</div>
+          <p class="font-heading italic text-[#7a9496] font-normal leading-relaxed mb-5 text-sm">"Deep, thoughtful, and accurate. The Saturn return reading gave me the framework I needed to stop resisting and start building."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-xs font-bold text-primary font-display">K</div>
+            <div><div class="font-body text-white text-sm font-medium">Kavita R.</div><div class="font-body text-[#3e5658] text-xs">Delhi, India</div></div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="text-primary text-sm mb-3">★★★★★</div>
+          <p class="font-heading italic text-[#7a9496] font-normal leading-relaxed mb-5 text-sm">"The synastry reading was eye-opening. It showed us why we are the way we are together — and how to grow through it."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-xs font-bold text-primary font-display">R</div>
+            <div><div class="font-body text-white text-sm font-medium">Rohan T.</div><div class="font-body text-[#3e5658] text-xs">Bangalore, India</div></div>
+          </div>
+        </div>
+        <!-- duplicate for seamless loop -->
+        <div class="testimonial-card">
+          <div class="text-primary text-sm mb-3">★★★★★</div>
+          <p class="font-heading italic text-[#7a9496] font-normal leading-relaxed mb-5 text-sm">"The reading was unlike anything I had experienced. Not vague platitudes — specific, precise insights that reframed how I understood my own life."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-xs font-bold text-primary font-display">A</div>
+            <div><div class="font-body text-white text-sm font-medium">Aarav S.</div><div class="font-body text-[#3e5658] text-xs">Mumbai, India</div></div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="text-primary text-sm mb-3">★★★★★</div>
+          <p class="font-heading italic text-[#7a9496] font-normal leading-relaxed mb-5 text-sm">"I came in a skeptic. I left with a map. The timing analysis alone saved me from making a major career mistake."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-xs font-bold text-primary font-display">P</div>
+            <div><div class="font-body text-white text-sm font-medium">Priya M.</div><div class="font-body text-[#3e5658] text-xs">Kathmandu, Nepal</div></div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="text-primary text-sm mb-3">★★★★★</div>
+          <p class="font-heading italic text-[#7a9496] font-normal leading-relaxed mb-5 text-sm">"Deep, thoughtful, and accurate. The Saturn return reading gave me the framework I needed to stop resisting and start building."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-xs font-bold text-primary font-display">K</div>
+            <div><div class="font-body text-white text-sm font-medium">Kavita R.</div><div class="font-body text-[#3e5658] text-xs">Delhi, India</div></div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="text-primary text-sm mb-3">★★★★★</div>
+          <p class="font-heading italic text-[#7a9496] font-normal leading-relaxed mb-5 text-sm">"The synastry reading was eye-opening. It showed us why we are the way we are together — and how to grow through it."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-xs font-bold text-primary font-display">R</div>
+            <div><div class="font-body text-white text-sm font-medium">Rohan T.</div><div class="font-body text-[#3e5658] text-xs">Bangalore, India</div></div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Services -->
-    <section
-      class="py-32 md:py-48 px-6 md:px-24 max-w-6xl mx-auto"
-      id="offerings"
-    >
-      <div class="mb-24">
-        <h3
-          class="font-body text-xs text-stone-500 uppercase tracking-[0.3em] mb-4"
-        >
-          Offerings
-        </h3>
-        <div class="h-[1px] w-12 bg-primary"></div>
-      </div>
-      <div class="space-y-32">
-        <!-- Service 01 -->
-        <div
-          class="group relative pl-8 md:pl-0 border-l border-white/10 md:border-l-0 transition-all duration-700 hover:opacity-100"
-        >
-          <div
-            class="absolute -left-[1px] top-0 h-0 w-[1px] bg-primary transition-all duration-500 group-hover:h-full md:hidden"
-          ></div>
-          <div class="md:grid md:grid-cols-12 gap-10 items-baseline">
-            <div class="col-span-2 text-primary font-mono text-sm opacity-60">
-              01 /
-            </div>
-            <div class="col-span-6">
-              <h3
-                class="font-display text-3xl md:text-5xl text-white mb-6 group-hover:text-primary/90 transition-colors cursor-default"
-              >
-                Birth Chart Interpretation
-              </h3>
-              <p
-                class="text-stone-500 text-lg leading-relaxed max-w-lg group-hover:text-stone-300 transition-colors"
-              >
-                The blueprint of the soul at the moment of first breath. We
-                decode the planetary positions to reveal character, purpose, and
-                inherent contradictions.
-              </p>
-            </div>
-            <div
-              class="col-span-4 flex justify-end mt-6 md:mt-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 transform translate-y-4 group-hover:translate-y-0"
-            >
-              <button
-                class="text-xs font-bold uppercase tracking-[0.15em] text-white flex items-center gap-2 hover:gap-4 transition-all"
-              >
-                Inquire
-                <span class="material-symbols-outlined text-sm"
-                  >arrow_forward</span
-                >
-              </button>
-            </div>
+  <!-- ── FOOTER / CTA ───────────────────────────────────────────────────────── -->
+  <footer class="relative py-28 px-6 flex flex-col items-center justify-center border-t border-white/5 bg-bg2" id="contact">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-xl h-[350px] bg-primary/4 rounded-full blur-[100px] pointer-events-none"></div>
+    <div class="max-w-lg w-full text-center relative z-10">
+      <p class="font-body text-xs text-[#3e5658] uppercase tracking-[0.3em] mb-3">Begin</p>
+      <h2 class="font-heading text-4xl md:text-5xl text-white mb-3 font-normal">
+        The stars are<br/><em class="text-white/25">waiting.</em>
+      </h2>
+      <p class="font-body text-[#4a6062] text-sm font-light mb-10">Leave your details and we'll reach out to schedule your reading.</p>
+
+      <form id="consultation-form" class="w-full flex flex-col gap-6" novalidate>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="text-left space-y-1.5">
+            <label class="font-body text-xs uppercase tracking-widest text-[#3e5658]">Name</label>
+            <input id="c-name" name="from_name" type="text" placeholder="Your Name" required class="jyo-input" />
+          </div>
+          <div class="text-left space-y-1.5">
+            <label class="font-body text-xs uppercase tracking-widest text-[#3e5658]">Email</label>
+            <input id="c-email" name="reply_to" type="email" placeholder="email@address.com" required class="jyo-input" />
           </div>
         </div>
-        <!-- Service 02 -->
-        <div
-          class="group relative pl-8 md:pl-0 border-l border-white/10 md:border-l-0 transition-all duration-700 hover:opacity-100"
-        >
-          <div
-            class="absolute -left-[1px] top-0 h-0 w-[1px] bg-primary transition-all duration-500 group-hover:h-full md:hidden"
-          ></div>
-          <div class="md:grid md:grid-cols-12 gap-10 items-baseline">
-            <div class="col-span-2 text-primary font-mono text-sm opacity-60">
-              02 /
-            </div>
-            <div class="col-span-6">
-              <h3
-                class="font-display text-3xl md:text-5xl text-white mb-6 group-hover:text-primary/90 transition-colors cursor-default"
-              >
-                Timing &amp; Cycles
-              </h3>
-              <p
-                class="text-stone-500 text-lg leading-relaxed max-w-lg group-hover:text-stone-300 transition-colors"
-              >
-                Understanding the 'when'. We analyze Dashas and transits to
-                identify periods of friction, flow, and transformation in your
-                timeline.
-              </p>
-            </div>
-            <div
-              class="col-span-4 flex justify-end mt-6 md:mt-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 transform translate-y-4 group-hover:translate-y-0"
-            >
-              <button
-                class="text-xs font-bold uppercase tracking-[0.15em] text-white flex items-center gap-2 hover:gap-4 transition-all"
-              >
-                Inquire
-                <span class="material-symbols-outlined text-sm"
-                  >arrow_forward</span
-                >
-              </button>
-            </div>
-          </div>
+        <div class="text-left space-y-1.5">
+          <label class="font-body text-xs uppercase tracking-widest text-[#3e5658]">What do you seek?</label>
+          <select id="c-subject" name="subject" class="jyo-input">
+            <option value="Birth Chart Reading">Birth Chart Reading</option>
+            <option value="Timing & Cycles">Timing &amp; Cycles</option>
+            <option value="Synastry Reading">Synastry Reading</option>
+            <option value="Saturn Return">Saturn Return</option>
+            <option value="General Inquiry">General Inquiry</option>
+          </select>
         </div>
-      </div>
-    </section>
+        <button type="submit" id="consult-btn"
+          class="mt-1 px-10 py-4 border border-primary/40 hover:bg-primary text-primary hover:text-white rounded-lg uppercase text-xs font-semibold tracking-[0.2em] transition-all duration-300 glow-hover"
+          style="background:rgba(241,89,42,0.08);">
+          ✦ &nbsp; Request Consultation
+        </button>
+      </form>
 
-    <!-- Footer -->
-    <footer
-      class="relative py-32 px-6 flex flex-col items-center justify-center border-t border-white/5 bg-[#080808]"
-      id="contact"
-    >
-      <div class="max-w-4xl text-center">
-        <h2 class="font-display text-4xl md:text-6xl text-white mb-12">
-          The stars are waiting.
-        </h2>
-        <form
-          id="consultation-form"
-          class="w-full max-w-md mx-auto flex flex-col gap-6"
-        >
-          <div class="relative group">
-            <input
-              class="w-full bg-transparent border-b border-white/20 py-4 text-center text-white placeholder-stone-600 focus:outline-none focus:border-primary transition-colors font-body rounded-none"
-              placeholder="Your Email Address"
-              type="email"
-              required
-            />
-          </div>
-          <button
-            type="submit"
-            class="mt-4 px-12 py-4 bg-primary/10 hover:bg-primary text-primary hover:text-white border border-primary/20 hover:border-primary rounded-lg uppercase text-xs font-bold tracking-[0.2em] transition-all duration-300"
-          >
-            Request Consultation
-          </button>
-        </form>
-        <div
-          class="mt-24 flex flex-col md:flex-row items-center justify-between w-full gap-8 text-xs text-stone-600 uppercase tracking-widest"
-        >
-          <span class="hover:text-stone-400 cursor-pointer transition-colors"
-            >Instagram</span
-          >
-          <span class="font-display text-stone-400">
-            © 2026 Jyotisha — Crafted by Sefin Gwachha.
-          </span>
-          <span class="hover:text-stone-400 cursor-pointer transition-colors"
-            >Twitter</span
-          >
-        </div>
+      <div class="mt-16 pt-8 flex flex-col md:flex-row items-center justify-between w-full gap-5 text-xs text-[#3e5658] uppercase tracking-widest" style="border-top:1px solid rgba(255,255,255,0.05);">
+        <a href="https://www.instagram.com/jyotisha.official/" target="_blank" rel="noopener" class="hover:text-[#7a9496] transition-colors underline-hover">Instagram</a>
+        <a href="https://www.tiktok.com/@jyotisha.official" target="_blank" rel="noopener" class="hover:text-[#7a9496] transition-colors underline-hover">TikTok</a>
+        <a href="https://www.facebook.com/profile.php?id=61550279852127" target="_blank" rel="noopener" class="hover:text-[#7a9496] transition-colors underline-hover">Facebook</a>
       </div>
-    </footer>
+      <div class="mt-5 font-display text-xs text-[#2a4042] tracking-widest">
+        © 2026 Jyotisha — Crafted by Sefin Gwachha.
+      </div>
+    </div>
+  </footer>
 
-    <!-- Scripts -->
-    <script src="script.js"></script>
-  </body>
+  <!-- ── SCRIPTS ─────────────────────────────────────────────────────────── -->
+  <script src="script.js" defer></script>
+  <script defer>
+    window.addEventListener('load', () => {
+      // Loader hide
+      const loader = document.getElementById('page-loader');
+      if (loader) { loader.classList.add('hide'); setTimeout(() => loader.remove(), 600); }
+    });
+
+    // Star Canvas
+    document.addEventListener('DOMContentLoaded', () => {
+      const canvas = document.getElementById('star-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const isMobile = window.innerWidth < 768;
+      const COUNT = isMobile ? 70 : 140;
+      const FRAME_MS = 1000 / 28;
+      let stars = [], rafId, lastT = 0;
+
+      function build() {
+        canvas.width  = canvas.offsetWidth  || window.innerWidth;
+        canvas.height = canvas.offsetHeight || window.innerHeight;
+        stars = Array.from({ length: COUNT }, () => ({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: Math.random() * 1.1 + 0.15,
+          phase: Math.random() * Math.PI * 2,
+          speed: Math.random() * 0.003 + 0.0007,
+        }));
+      }
+      function draw(t) {
+        rafId = requestAnimationFrame(draw);
+        if (t - lastT < FRAME_MS) return;
+        lastT = t;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (const s of stars) {
+          const a = 0.1 + 0.42 * Math.abs(Math.sin(s.phase + t * s.speed * 0.001));
+          ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(241,89,42,${a.toFixed(2)})`; ctx.fill();
+        }
+      }
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) cancelAnimationFrame(rafId);
+        else rafId = requestAnimationFrame(draw);
+      });
+      build(); rafId = requestAnimationFrame(draw);
+      let rt;
+      window.addEventListener('resize', () => {
+        clearTimeout(rt); rt = setTimeout(() => { cancelAnimationFrame(rafId); build(); rafId = requestAnimationFrame(draw); }, 250);
+      }, { passive: true });
+
+      // Parallax planets
+      let pTick = false, pX = 0, pY = 0;
+      document.addEventListener('mousemove', e => {
+        pX = e.clientX; pY = e.clientY;
+        if (!pTick) { pTick = true; requestAnimationFrame(() => {
+          document.querySelectorAll('.parallax-planet').forEach(el => {
+            const s = parseFloat(el.dataset.parallaxSpeed || 0.02);
+            el.style.transform = `translate(${(pX-innerWidth/2)*s}px,${(pY-innerHeight/2)*s}px)`;
+          }); pTick = false;
+        }); }
+      }, { passive: true });
+    });
+
+    // Consultation form → EmailJS
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('consultation-form');
+      const btn  = document.getElementById('consult-btn');
+      if (!form || !btn) return;
+
+      form.addEventListener('submit', async e => {
+        e.preventDefault();
+
+        const name  = document.getElementById('c-name').value.trim();
+        const email = document.getElementById('c-email').value.trim();
+        if (!name || !email) {
+          if (window.showToast) window.showToast('Please fill in your name and email.', true);
+          return;
+        }
+
+        const orig = btn.innerHTML;
+        btn.innerHTML = 'Transmitting…';
+        btn.disabled = true;
+        btn.style.opacity = '0.55';
+
+        try {
+          const result = await emailjs.send(
+            'service_qv8qxdp',
+            'template_j83ppbh',
+            {
+              from_name: name,
+              reply_to:  email,
+              subject:   document.getElementById('c-subject').value,
+              message:   `Consultation request via homepage.\nName: ${name}\nEmail: ${email}\nType: ${document.getElementById('c-subject').value}`,
+            }
+          );
+          console.log('EmailJS success:', result.status, result.text);
+          btn.innerHTML = '✦ &nbsp; Request Received';
+          btn.style.cssText = 'background:#F1592A;color:#fff;border-color:#F1592A;opacity:1;';
+          if (window.showToast) window.showToast('Your consultation request has been received. ✦');
+          form.reset();
+          setTimeout(() => {
+            btn.innerHTML = orig;
+            btn.disabled = false;
+            btn.style.cssText = '';
+          }, 4000);
+        } catch (err) {
+          console.error('EmailJS error:', err);
+          btn.innerHTML = orig;
+          btn.disabled = false;
+          btn.style.opacity = '';
+          const msg = err && err.text ? `Error: ${err.text}` : 'Something went wrong. Please email jyotiseek@gmail.com directly.';
+          if (window.showToast) window.showToast(msg, true);
+        }
+      });
+    });
+  </script>
+</body>
 </html>
