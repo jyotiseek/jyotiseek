@@ -1,301 +1,328 @@
 <!doctype html>
 <html class="dark" lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>The Archivist | Jyotisha</title>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | Jyotisha</title>
 
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com" rel="preconnect" />
-    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700&family=Manrope:wght@200;300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-      rel="stylesheet"
-    />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" media="print" onload="this.media='all'"
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;500;600&display=swap" />
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;500;600&display=swap" />
+  </noscript>
+  <link rel="stylesheet" media="print" onload="this.media='all'"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@400,0&display=swap" />
 
-    <!-- Libraries -->
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-
-    <!-- Config -->
-    <script>
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              primary: "#e77e23",
-              "background-dark": "#050505",
-              "surface-dark": "#0a0a0a",
-              "text-dim": "#888888",
-            },
-            fontFamily: {
-              display: ["Cinzel", "serif"],
-              body: ["Manrope", "sans-serif"],
-              modern: ["Poppins", "sans-serif"],
-            },
+  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#F1592A',
+            bg:      '#0e1a1c',
+            bg2:     '#172A2C',
+            surface: '#1c3133',
+          },
+          fontFamily: {
+            display: ['Cinzel',           'serif'],
+            heading: ['Playfair Display', 'serif'],
+            body:    ['Poppins',          'sans-serif'],
           },
         },
-      };
-    </script>
-    <link rel="stylesheet" href="style.css" />
-  </head>
+      },
+    };
+  </script>
 
-  <body
-    class="bg-[#050505] text-slate-200 font-body antialiased selection:bg-primary selection:text-black"
-  >
-    <!-- Navigation -->
-    <nav
-      class="fixed top-0 w-full z-50 mix-blend-difference px-6 py-8 md:px-12 flex justify-between items-center pointer-events-none"
-    >
-      <div class="pointer-events-auto">
-        <a
-          href="index.html"
-          class="font-display font-medium text-lg tracking-[0.2em] text-white uppercase opacity-80 hover:opacity-100 transition-opacity"
-        >
-          Jyotisha
-        </a>
-      </div>
-      <div class="hidden md:flex items-center gap-12 pointer-events-auto">
-        <a
-          href="index.html"
-          class="text-xs font-bold tracking-[0.15em] text-stone-400 uppercase hover:text-primary transition-colors"
-          >Home</a
-        >
-        <a
-          href="about.html"
-          class="text-xs font-bold tracking-[0.15em] text-stone-400 uppercase hover:text-primary transition-colors"
-          >About</a
-        >
-        <a
-          href="journal.html"
-          class="text-xs font-bold tracking-[0.15em] text-stone-400 uppercase hover:text-primary transition-colors"
-          >Journal</a
-        >
-        <a
-          href="services.html"
-          class="text-xs font-bold tracking-[0.15em] text-stone-400 uppercase hover:text-primary transition-colors"
-          >Offerings</a
-        >
-        <a
-          href="contact.html"
-          class="text-xs font-bold tracking-[0.15em] text-stone-400 uppercase hover:text-primary transition-colors"
-          >Contact</a
-        >
-      </div>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    (function () {
+      // Get your Public Key from: emailjs.com → Account → API Keys → Public Key
+      emailjs.init({ publicKey: "kJ3uh0WqyOOr37ivA" });
+    })();
+  </script>
 
-      <div class="md:hidden pointer-events-auto">
-        <button
-          id="mobile-menu-btn"
-          class="group flex items-center gap-2 text-xs font-bold tracking-[0.1em] text-white uppercase hover:text-primary transition-colors"
-        >
-          <span class="material-symbols-outlined text-lg">menu</span>
-        </button>
-      </div>
-    </nav>
+  <link rel="icon" type="image/svg+xml" href="logo.svg" />
+  <link rel="stylesheet" href="style.css" />
+</head>
 
-    <!-- Mobile Menu Overlay -->
-    <div
-      id="mobile-menu"
-      class="fixed inset-0 z-40 bg-[#050505] flex flex-col items-center justify-center opacity-0 pointer-events-none transition-opacity duration-500"
-    >
-      <button
-        id="close-menu-btn"
-        class="absolute top-8 right-6 text-stone-500 hover:text-white transition-colors"
-      >
-        <span class="material-symbols-outlined text-2xl">close</span>
+<body class="bg-bg text-[#d8e8e9] font-body antialiased overflow-x-hidden">
+
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"></div>
+
+  <nav class="fixed top-0 w-full z-50 mix-blend-difference px-6 py-7 md:px-12 flex justify-between items-center pointer-events-none">
+    <div class="pointer-events-auto">
+      <a href="index.html" class="font-display text-base tracking-[0.25em] text-white uppercase opacity-80 hover:opacity-100 transition-opacity">Jyotisha</a>
+    </div>
+    <div class="hidden md:flex items-center gap-10 pointer-events-auto">
+      <a href="index.html"   class="text-xs font-medium tracking-[0.15em] text-[#7a9496] uppercase hover:text-primary transition-colors underline-hover">Home</a>
+      <a href="about.html"   class="text-xs font-medium tracking-[0.15em] text-[#7a9496] uppercase hover:text-primary transition-colors underline-hover">About</a>
+      <a href="contact.html" class="text-xs font-medium tracking-[0.15em] text-primary uppercase">Contact</a>
+    </div>
+    <div class="md:hidden pointer-events-auto">
+      <button id="mobile-menu-btn" class="text-white">
+        <span class="material-symbols-outlined text-xl">menu</span>
       </button>
-      <div class="flex flex-col gap-8 text-center">
-        <a
-          href="index.html"
-          class="mobile-link font-display text-3xl text-stone-400 hover:text-primary transition-colors"
-          >Home</a
-        >
-        <a
-          href="about.html"
-          class="mobile-link font-display text-3xl text-stone-400 hover:text-primary transition-colors"
-          >About</a
-        >
-        <a
-          href="journal.html"
-          class="mobile-link font-display text-3xl text-stone-400 hover:text-primary transition-colors"
-          >Journal</a
-        >
-        <a
-          href="services.html"
-          class="mobile-link font-display text-3xl text-stone-400 hover:text-primary transition-colors"
-          >Offerings</a
-        >
-        <a
-          href="contact.html"
-          class="mobile-link font-display text-3xl text-stone-400 hover:text-primary transition-colors"
-          >Contact</a
-        >
+    </div>
+  </nav>
+
+  <div id="mobile-menu" class="fixed inset-0 z-[60] bg-bg flex flex-col items-center justify-center opacity-0 pointer-events-none transition-opacity duration-500">
+    <button id="close-menu-btn" class="text-[#7a9496] hover:text-white transition-colors">
+      <span class="material-symbols-outlined text-2xl">close</span>
+    </button>
+    <div class="flex flex-col gap-8 text-center mt-6">
+      <a href="index.html"   class="mobile-link font-display text-3xl text-[#7a9496] hover:text-primary transition-colors">Home</a>
+      <a href="about.html"   class="mobile-link font-display text-3xl text-[#7a9496] hover:text-primary transition-colors">About</a>
+      <a href="contact.html" class="mobile-link font-display text-3xl text-[#7a9496] hover:text-primary transition-colors">Contact</a>
+    </div>
+    <div class="absolute bottom-10 font-body text-[10px] text-[#3e5658] tracking-widest uppercase">© 2026 Jyotisha</div>
+  </div>
+
+  <header class="relative pt-44 pb-16 px-6 md:px-12 text-center overflow-hidden">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-2xl h-[400px] bg-primary/5 rounded-full blur-[100px] pointer-events-none"></div>
+    <div class="relative z-10">
+      <div class="fade-in-up flex items-center justify-center gap-3 mb-5">
+        <div class="w-6 h-px bg-primary/60"></div>
+        <p class="font-body text-primary text-[0.65rem] tracking-[0.35em] uppercase opacity-80">Signal</p>
+        <div class="w-6 h-px bg-primary/60"></div>
+      </div>
+      <h1 class="fade-in-up delay-200 font-display text-5xl md:text-7xl text-white leading-tight">
+        Open a <em class="text-white/25" style="font-style:italic;">Channel</em>
+      </h1>
+      <p class="fade-in-up delay-300 font-heading italic text-[#7a9496] text-xl mt-5 max-w-md mx-auto font-normal">
+        The archive is listening. Let us translate the stars for you.
+      </p>
+    </div>
+  </header>
+
+  <section class="py-12 md:py-20 px-6 md:px-12 max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-14 lg:gap-20">
+
+      <div class="lg:col-span-2 space-y-10">
+        <div class="space-y-5">
+          <h2 class="font-heading text-2xl text-white font-normal">Direct Communication</h2>
+          <p class="font-body text-[#7a9496] leading-relaxed font-light text-sm">
+            Whether you seek to schedule a reading, inquire about a specific transit, or simply wish to discuss the architecture of the cosmos — the archive is listening.
+          </p>
+          <p class="font-body text-[#3e5658] text-xs leading-relaxed">
+            Please allow 24–48 hours for a response. The stars move slowly; sometimes, so do we.
+          </p>
+        </div>
+
+        <div class="space-y-7 pt-7" style="border-top:1px solid rgba(255,255,255,0.06);">
+
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0" style="border:1px solid rgba(255,255,255,0.07);">
+              <span class="material-symbols-outlined text-primary" style="font-size:1.1rem;">mail</span>
+            </div>
+            <div>
+              <h3 class="font-body text-white text-xs font-semibold uppercase tracking-widest mb-1">Electronic Mail</h3>
+              <a href="mailto:jyotiseek@gmail.com" class="font-body text-[#7a9496] hover:text-primary transition-colors text-sm underline-hover">jyotiseek@gmail.com</a>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0" style="border:1px solid rgba(255,255,255,0.07);">
+              <span class="material-symbols-outlined text-primary" style="font-size:1.1rem;">call</span>
+            </div>
+            <div>
+              <h3 class="font-body text-white text-xs font-semibold uppercase tracking-widest mb-1">Phone</h3>
+              <a href="tel:+9779819618779" class="font-body text-[#7a9496] hover:text-primary transition-colors text-sm underline-hover">+977-9819618779</a>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5" style="border:1px solid rgba(255,255,255,0.07);">
+              <span class="material-symbols-outlined text-primary" style="font-size:1.1rem;">share_location</span>
+            </div>
+            <div class="w-full">
+              <h3 class="font-body text-white text-xs font-semibold uppercase tracking-widest mb-2">Location</h3>
+              <p class="font-body text-[#7a9496] text-sm mb-0.5">SanoThimi, Tershatar–Kaushaltar Road</p>
+              <p class="font-body text-[#3e5658] text-xs mb-4">Bhaktapur, Nepal · GMT+5:45</p>
+              <div class="relative w-full rounded-xl overflow-hidden" style="height:190px; border:1px solid rgba(255,255,255,0.07);">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d442.3!2d85.36668!3d27.67683!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2s!5e0!3m2!1sen!2snp!4v1700000000000!5m2!1sen!2snp"
+                  width="100%" height="100%"
+                  style="border:0; filter:invert(85%) hue-rotate(180deg) saturate(0.5) brightness(0.75);"
+                  allowfullscreen="" loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"
+                  title="Jyotisha location — SanoThimi, Nepal"
+                ></iframe>
+              </div>
+              <a href="https://www.google.com/maps?q=27.67683,85.36668" target="_blank" rel="noopener"
+                class="inline-flex items-center gap-2 mt-3 font-body text-xs text-[#3e5658] hover:text-primary transition-colors uppercase tracking-widest">
+                <span class="material-symbols-outlined text-sm">open_in_new</span>
+                Open in Maps
+              </a>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0" style="border:1px solid rgba(255,255,255,0.07);">
+              <span class="material-symbols-outlined text-primary" style="font-size:1.1rem;">tag</span>
+            </div>
+            <div>
+              <h3 class="font-body text-white text-xs font-semibold uppercase tracking-widest mb-3">Follow</h3>
+              <div class="flex items-center gap-4">
+                <a href="https://www.instagram.com/jyotisha.official/" target="_blank" rel="noopener"
+                  class="font-body text-[#3e5658] hover:text-primary transition-colors text-xs uppercase tracking-widest underline-hover">Instagram</a>
+                <span class="text-white/10">|</span>
+                <a href="https://www.tiktok.com/@jyotisha.official" target="_blank" rel="noopener"
+                  class="font-body text-[#3e5658] hover:text-primary transition-colors text-xs uppercase tracking-widest underline-hover">TikTok</a>
+                <span class="text-white/10">|</span>
+                <a href="https://www.facebook.com/profile.php?id=61550279852127" target="_blank" rel="noopener"
+                  class="font-body text-[#3e5658] hover:text-primary transition-colors text-xs uppercase tracking-widest underline-hover">Facebook</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="lg:col-span-3">
+        <div class="relative overflow-hidden rounded-2xl p-8 md:p-12 group"
+          style="background:#1c3133; border:1px solid rgba(255,255,255,0.06);">
+          <div class="absolute -top-16 -right-16 w-52 h-52 bg-primary/6 rounded-full blur-[70px] pointer-events-none group-hover:bg-primary/10 transition-colors duration-1000"></div>
+          <div class="absolute -bottom-16 -left-16 w-44 h-44 bg-primary/4 rounded-full blur-[55px] pointer-events-none"></div>
+
+          <h3 class="font-heading text-2xl text-white font-normal mb-1 relative z-10">Send a Message</h3>
+          <p class="font-body text-[#3e5658] text-sm mb-9 relative z-10">Fill in the details below and we will be in touch.</p>
+
+          <form id="contact-form" class="space-y-7 relative z-10" novalidate>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-7">
+              <div class="space-y-1.5">
+                <label for="name" class="font-body text-xs uppercase tracking-widest text-[#3e5658]">Name *</label>
+                <input type="text" id="name" name="from_name" placeholder="Your Name" required class="jyo-input" />
+              </div>
+              <div class="space-y-1.5">
+                <label for="email" class="font-body text-xs uppercase tracking-widest text-[#3e5658]">Email *</label>
+                <input type="email" id="email" name="reply_to" placeholder="email@address.com" required class="jyo-input" />
+              </div>
+            </div>
+
+            <div class="space-y-1.5">
+              <label for="subject" class="font-body text-xs uppercase tracking-widest text-[#3e5658]">Subject</label>
+              <select id="subject" name="subject" class="jyo-input">
+                <option value="Booking a Reading">Booking a Reading</option>
+                <option value="General Inquiry">General Inquiry</option>
+                <option value="Collaboration">Collaboration</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <div class="space-y-1.5">
+              <label for="message" class="font-body text-xs uppercase tracking-widest text-[#3e5658]">Message *</label>
+              <textarea id="message" name="message" rows="5" required
+                placeholder="What do the stars whisper to you?"
+                class="jyo-input resize-none"></textarea>
+            </div>
+
+            <button type="submit" id="contact-submit"
+              class="w-full py-4 font-body font-semibold text-xs uppercase tracking-[0.2em] text-white rounded-lg transition-all duration-300 glow-hover"
+              style="border:1px solid rgba(241,89,42,0.35); background:rgba(241,89,42,0.08);">
+              Transmit Signal
+            </button>
+          </form>
+
+          <div id="form-success" class="hidden absolute inset-0 flex flex-col items-center justify-center rounded-2xl z-20"
+            style="background:#1c3133;">
+            <span class="text-5xl text-primary mb-4">✦</span>
+            <h3 class="font-heading text-2xl text-white mb-2 font-normal">Signal Received</h3>
+            <p class="font-body text-[#7a9496] text-center max-w-xs text-sm">Your message has been transmitted. We will respond within 24–48 hours.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="relative py-20 px-6 flex flex-col items-center justify-center bg-bg2" style="border-top:1px solid rgba(255,255,255,0.05);">
+    <div class="max-w-4xl text-center">
+      <h2 class="font-heading text-3xl md:text-4xl text-white mb-7 font-normal">The stars are waiting.</h2>
+      <div class="flex flex-col md:flex-row items-center justify-between w-full gap-6 font-body text-xs text-[#3e5658] uppercase tracking-widest">
+        <a href="https://www.instagram.com/jyotisha.official/" target="_blank" rel="noopener" class="hover:text-[#7a9496] transition-colors underline-hover">Instagram</a>
+        <span class="font-display text-[#3e5658]">© 2026 Jyotisha — Crafted by Sefin Gwachha.</span>
+        <a href="https://www.tiktok.com/@jyotisha.official" target="_blank" rel="noopener" class="hover:text-[#7a9496] transition-colors underline-hover">TikTok</a>
+        <a href="https://www.facebook.com/profile.php?id=61550279852127" target="_blank" rel="noopener" class="hover:text-[#7a9496] transition-colors underline-hover">Facebook</a>
       </div>
     </div>
+  </footer>
 
-    <!-- Hero / Title -->
-    <header
-      class="relative pt-48 pb-24 px-6 md:px-12 text-center overflow-hidden"
-    >
-      <div
-        class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none"
-      ></div>
-      <div class="relative z-10">
-        <p
-          class="fade-in-up font-body text-primary text-xs tracking-[0.3em] mb-6 uppercase opacity-80"
-        >
-          The Keeper
-        </p>
-        <h1
-          class="fade-in-up delay-100 font-display text-5xl md:text-7xl text-white leading-tight mb-8"
-        >
-          The <span class="italic text-white/40">Archivist</span>
-        </h1>
-      </div>
-    </header>
-
-    <!-- Biography Section -->
-    <section class="py-12 md:py-24 px-6 md:px-12 max-w-6xl mx-auto">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-        <!-- Image / Visual -->
-        <div
-          class="relative aspect-[3/4] md:aspect-[4/5] rounded-lg overflow-hidden border border-white/5"
-        >
-          <div
-            class="absolute inset-0 bg-primary/10 mix-blend-overlay z-10"
-          ></div>
-          <!-- Placeholder for Astrologer Photo -->
-          <img
-            src="https://images.unsplash.com/photo-1531608139434-1912ae0713cd?q=80&w=1920&auto=format&fit=crop"
-            alt="The Archivist"
-            class="w-full h-full object-cover grayscale contrast-125 hover:grayscale-0 transition-all duration-1000 ease-out"
-          />
-        </div>
-
-        <!-- Text Content -->
-        <div class="flex flex-col gap-8">
-          <h2 class="font-display text-3xl text-white">
-            Tracing the threads of fate.
-          </h2>
-          <div
-            class="space-y-6 text-text-dim text-lg leading-relaxed font-light"
-          >
-            <p>
-              I do not believe in coincidence. The universe is a clockwork
-              mechanism of infinite complexity, and every gear turns for a
-              reason. My journey into Jyotishya began not out of curiosity, but
-              out of a necessity to understand the "why" behind the chaos.
-            </p>
-            <p>
-              For over a decade, I have studied the ancient Vedic texts,
-              translating their Sanskrit verses into the language of modern
-              life. I function less as a fortune teller and more as a translator
-              of cosmic code.
-            </p>
-            <p>
-              My role is to hand you the map you were born with, so you may
-              navigate the labyrinth of your life with open eyes.
-            </p>
-          </div>
-          <div class="mt-8">
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Signature_sample.svg"
-              alt="Signature"
-              class="h-12 opacity-50 invert"
-            />
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Philosophy / Quote -->
-    <section
-      class="py-32 px-6 relative overflow-hidden bg-[#080808] border-y border-white/5"
-    >
-      <div class="max-w-4xl mx-auto text-center relative z-10">
-        <span class="text-5xl text-primary opacity-30 font-display mb-4 block"
-          >“</span
-        >
-        <blockquote
-          class="font-display text-2xl md:text-4xl text-white leading-normal italic"
-        >
-          Destiny is not a cage. It is a river. You cannot stop the water from
-          flowing, but you can learn to swim with the current rather than
-          drowning against it.
-        </blockquote>
-        <span class="text-5xl text-primary opacity-30 font-display mt-8 block"
-          >”</span
-        >
-      </div>
-      <!-- Background Decoration -->
-      <div
-        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] border border-white/5 rounded-full opacity-20 animate-[spin_60s_linear_infinite]"
-      ></div>
-    </section>
-
-    <!-- Footer -->
-    <footer
-      class="relative py-24 px-6 flex flex-col items-center justify-center border-t border-white/5 bg-[#050505]"
-      id="contact"
-    >
-      <div class="max-w-4xl text-center">
-        <h2 class="font-display text-3xl md:text-4xl text-white mb-8">
-          The stars are waiting.
-        </h2>
-        <div
-          class="mt-8 flex flex-col md:flex-row items-center justify-between w-full gap-8 text-xs text-stone-600 uppercase tracking-widest"
-        >
-          <span class="hover:text-stone-400 cursor-pointer transition-colors"
-            >Instagram</span
-          >
-          <span class="font-display text-stone-400">
-            © 2026 Jyotisha — Crafted by Sefin Gwachha.
-          </span>
-
-          <span class="hover:text-stone-400 cursor-pointer transition-colors"
-            >Twitter</span
-          >
-        </div>
-      </div>
-    </footer>
-
-    <!-- Scripts -->
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        // Smooth Scroll
-        const lenis = new Lenis();
-        function raf(time) {
-          lenis.raf(time);
-          requestAnimationFrame(raf);
+  <script src="script.js" defer></script>
+  <script defer>
+    // Pre-select subject from URL ?subject= param
+    document.addEventListener('DOMContentLoaded', () => {
+      const sub = new URLSearchParams(window.location.search).get('subject');
+      if (sub) {
+        const sel = document.getElementById('subject');
+        if (sel) {
+          const map = { reading: 'Booking a Reading', inquiry: 'General Inquiry', collaboration: 'Collaboration' };
+          sel.value = map[sub] || sub;
         }
-        requestAnimationFrame(raf);
+      }
+    });
 
-        // Mobile Menu Logic
-        const mobileBtn = document.getElementById("mobile-menu-btn");
-        const closeBtn = document.getElementById("close-menu-btn");
-        const mobileMenu = document.getElementById("mobile-menu");
+    // Contact form → EmailJS
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('contact-form');
+      const btn  = document.getElementById('contact-submit');
+      if (!form || !btn) return;
 
-        function toggleMenu(show) {
-          if (show) {
-            mobileMenu.classList.remove("opacity-0", "pointer-events-none");
-            mobileMenu.classList.add("opacity-100", "pointer-events-auto");
-          } else {
-            mobileMenu.classList.remove("opacity-100", "pointer-events-auto");
-            mobileMenu.classList.add("opacity-0", "pointer-events-none");
-          }
+      form.addEventListener('submit', async e => {
+        e.preventDefault();
+
+        // Validate required fields
+        const name    = document.getElementById('name').value.trim();
+        const email   = document.getElementById('email').value.trim();
+        const message = document.getElementById('message').value.trim();
+        if (!name || !email || !message) {
+          if (window.showToast) window.showToast('Please fill in all required fields.', true);
+          return;
         }
-        if (mobileBtn)
-          mobileBtn.addEventListener("click", () => toggleMenu(true));
-        if (closeBtn)
-          closeBtn.addEventListener("click", () => toggleMenu(false));
+
+        // Button loading state
+        const orig = btn.textContent.trim();
+        btn.textContent = 'Transmitting…';
+        btn.disabled = true;
+        btn.style.opacity = '0.55';
+
+        try {
+          const result = await emailjs.send(
+            'service_qv8qxdp',   // ← your Service ID
+            'template_j83ppbh',  // ← Keep your MAIN Template ID here. The linked auto-reply triggers automatically.
+            {
+              // Variables for your main notification template
+              from_name: name,
+              reply_to:  email,
+              subject:   document.getElementById('subject').value,
+              message:   message,
+              
+              // Variables specifically mapped for your auto-reply template (template_o6xfbkg)
+              name:      name,
+              email:     email,
+              title:     document.getElementById('subject').value
+            }
+          );
+          console.log('EmailJS success:', result.status, result.text);
+          // Show success overlay
+          const overlay = document.getElementById('form-success');
+          if (overlay) overlay.classList.remove('hidden');
+          if (window.showToast) window.showToast('✦ Signal transmitted successfully.');
+          form.reset();
+        } catch (err) {
+          console.error('EmailJS error:', err);
+          btn.textContent = orig;
+          btn.disabled = false;
+          btn.style.opacity = '';
+          const msg = err && err.text ? `Error: ${err.text}` : 'Transmission failed. Please email jyotiseek@gmail.com directly.';
+          if (window.showToast) window.showToast(msg, true);
+        }
       });
-    </script>
-  </body>
+    });
+  </script>
+</body>
 </html>
